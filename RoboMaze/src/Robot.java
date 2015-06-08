@@ -38,8 +38,14 @@ public class Robot {
 		}
 			
 		try {
-			Room newLocation = Grid.getRoom(coords);
-			newLocation.moveto(this);
+			Room temp = Grid.getRoom(coords);
+			Room newLocation = temp.moveto(this);
+			
+			if (newLocation.equals(null)) // Hit a rock
+				return;
+			
+			location = newLocation;
+			
 		} catch (IndexOutOfBoundsException e) {
 			// Don't move.
 		}

@@ -48,7 +48,12 @@ public class Grid {
 		
 		while (obsReader.ready()) {
 			String[] line = obsReader.readLine().trim().split(",");
-			board[Integer.parseInt(line[0])][Integer.parseInt(line[1])].addObstacle(line[2].split("."));
+			String[] obsline = line[2].split("."); // not sure if this is going to do regex anychar
+					
+			int xcoord = Integer.parseInt(line[0]);
+			int ycoord = Integer.parseInt(line[1]);
+			
+			board[xcoord][ycoord].addObstacle(obsline);
 		}
 		
 		obsReader.close();

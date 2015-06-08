@@ -27,11 +27,22 @@ public class Room {
 	 * This allows us to trigger an obstacle without needing to expose it to
 	 * the robot.
 	 * 
+	 * It really just returns itself to the robot, or the result of the obstacle.
+	 * 
 	 * @param robot
 	 */
-	public void moveto(Robot robot) {
-		// TODO Auto-generated method stub
+	public Room moveto(Robot robot) {
+		Room newRoom = this;
 		
+		if (obstacle.equals(null))
+			return newRoom;
+		
+		newRoom = obstacle.moveto(robot);
+		
+		if (obstacle.getClass().equals(Spinner.class))
+			newRoom = this; // I really suck
+		
+		return newRoom;
 	}
 
 	/**
