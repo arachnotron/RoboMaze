@@ -54,7 +54,7 @@ public class Grid {
 					
 			int xcoord = Integer.parseInt(line[0]);
 			int ycoord = Integer.parseInt(line[1]);
-			System.out.printf("[%d,%d]\n", xcoord, ycoord);
+			//System.out.printf("[%d,%d]\n", xcoord, ycoord);
 			
 			board[xcoord][ycoord].addObstacle(obsline);
 		}
@@ -117,14 +117,20 @@ public class Grid {
 		BufferedReader isr = new BufferedReader(new InputStreamReader(System.in));
 		
 		try {
+			/* 
+			 * Here I am assuming we want to directly control the robot's movement one step at a time.
+			 * I am unsure about the wording, where it says the robot will accept a series of commands.
+			 * If it means that it is to be given a command set and the run automatically following that,
+			 * then this can easily be stripped out and replaced with it.
+			 */
 			while (true) {
 				String ln = isr.readLine();
 				
-				if (ln.equals("f"))
+				if (ln.equalsIgnoreCase("f"))
 					robby.moveForward();
-				else if (ln.equals("l"))
+				else if (ln.equalsIgnoreCase("l"))
 					robby.moveLeft();
-				else if (ln.equals("r"))
+				else if (ln.equalsIgnoreCase("r"))
 					robby.moveRight();
 				else
 					break;

@@ -25,8 +25,8 @@ public class Hole implements Obstacle {
 	public Room moveto(Robot robot) {
 		int[] np = connected.getCoordinates();
 		
-		System.out.printf("Robot has entered a hole. Moving into new position, [%d, %d]\n",
-				np[0], np[1]);
+		//System.out.printf("Robot has entered a hole. Moving into new position, [%d, %d]\n",
+		//		np[0], np[1]);
 		
 		return connected.moveto(robot);
 	}
