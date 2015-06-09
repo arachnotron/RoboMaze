@@ -11,7 +11,11 @@ public class Robot {
 	
 	public Robot(Room start, int direction) {
 		location = start;
-		facing = direction == 360 ? 0 : direction;
+		
+		if (direction == 360)
+			direction = 0;
+		
+		facing = direction;
 	}
 	
 	public void turnLeft() {
@@ -30,18 +34,18 @@ public class Robot {
 	
 	public void moveForward() {
 		int[] coords = location.getCoordinates();
-		System.out.printf("Robot moving into new position, [%d, %d]\n", coords[0], coords[1]);
+		System.out.printf("[%d,%d]", coords[0], coords[1]);
 		
-		switch(facing/90) {
-		case 0:
-			coords[0] = coords[0]+1;
-		case 1:
-			coords[1] = coords[1]+1;
-		case 2:
-			coords[0] = coords[0]-1;
-		case 3:
-			coords[1] = coords[1]-1;
-		}
+		if (facing == 0)
+			coords[0] += 1;
+		else if (facing == 90)
+			coords[1] += 1;
+		else if (facing == 180)
+			coords[0] -= 1;
+		else if (facing == 270)
+			coords[1] -= 1;
+		
+		System.out.printf("Robot moving into new position, [%d, %d]\n", coords[0], coords[1]);
 			
 		try {
 			Room temp = Grid.getRoom(coords);

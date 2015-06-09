@@ -17,7 +17,7 @@ public class GridTest {
 		} catch (IOException e) {
 			fail("Unable to load file.");
 		} catch (IndexOutOfBoundsException e) {
-			// loader catches this, plus we don't care about it
+			fail("Obstacles out of bounds");
 		}
 		
 		int[] coords = new int[2];

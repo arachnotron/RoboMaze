@@ -40,7 +40,7 @@ public class Room {
 	public Room moveto(Robot robot) {
 		Room newRoom = this;
 		
-		if (obstacle.equals(null))
+		if (obstacle == null)
 			return newRoom;
 		
 		newRoom = obstacle.moveto(robot);

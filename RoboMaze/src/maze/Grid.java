@@ -43,17 +43,18 @@ public class Grid {
 		
 		/*
 		 * Format of obstacle file:
-		 * 	XVAL,YVAL,[Rock.  Spinner.D  Hole.X.Y]\n
+		 * 	XVAL,YVAL,[Rock  Spinner.D  Hole.X.Y]\n
 		 */
 		File obs = new File(obstacles);
 		BufferedReader obsReader = new BufferedReader(new FileReader(obs));
 		
 		while (obsReader.ready()) {
 			String[] line = obsReader.readLine().trim().split(",");
-			String[] obsline = line[2].split("."); // not sure if this is going to do regex anychar
+			String[] obsline = line[2].split("\\.");
 					
 			int xcoord = Integer.parseInt(line[0]);
 			int ycoord = Integer.parseInt(line[1]);
+			System.out.printf("[%d,%d]\n", xcoord, ycoord);
 			
 			board[xcoord][ycoord].addObstacle(obsline);
 		}
@@ -103,6 +104,7 @@ public class Grid {
 		} catch (IndexOutOfBoundsException e) {
 			System.err.println("Certain obstacles attempted to place in out-of-bounds " 
 					+ "rooms. They will be ignored.");
+			e.printStackTrace();
 		}
 		
 		int[] coords = new int[2];
@@ -112,21 +114,23 @@ public class Grid {
 		System.out.println("Insert command sequence one command at a time." +
 				" Possible inputs: L - Move Left / R - Move Right / F - Move Forward");
 		
-		InputStreamReader isr = new InputStreamReader(System.in);
+		BufferedReader isr = new BufferedReader(new InputStreamReader(System.in));
 		
 		try {
 			while (true) {
-				switch(isr.read()) {
-				case 'f':
+				String ln = isr.readLine();
+				
+				if (ln.equals("f"))
 					robby.moveForward();
-				case 'l':
+				else if (ln.equals("l"))
 					robby.moveLeft();
-				case 'r':
+				else if (ln.equals("r"))
 					robby.moveRight();
-				case '\n':
+				else
 					break;
-				}
 			}
+			
+			isr.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
